@@ -1,5 +1,6 @@
 package com.example.demo.dto;
 
+import com.example.demo.entity.Reservation;
 import lombok.Getter;
 
 import java.time.LocalDateTime;

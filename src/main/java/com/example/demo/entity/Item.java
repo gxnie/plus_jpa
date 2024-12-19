@@ -2,10 +2,12 @@ package com.example.demo.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import org.hibernate.annotations.DynamicInsert;
 
 
 @Entity
 @Getter
+@DynamicInsert // 엔티티 Insert할 때 null인 필드는 insert문에 포함되지 않도록함
 // TODO: 6. Dynamic Insert
 public class Item {
     @Id
