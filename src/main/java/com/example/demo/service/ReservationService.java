@@ -2,19 +2,16 @@ package com.example.demo.service;
 
 import com.example.demo.dto.ReservationResponseDto;
 import com.example.demo.entity.*;
-import com.example.demo.exception.ReservationConflictException;
 import com.example.demo.repository.ItemRepository;
 import com.example.demo.repository.ReservationRepository;
 import com.example.demo.repository.UserRepository;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import jdk.incubator.vector.Byte128Vector;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 import static com.example.demo.entity.ReservationStatus.*;
 
@@ -54,7 +51,7 @@ public class ReservationService {
         Item item = itemRepository.findById(itemId).orElseThrow(() -> new IllegalArgumentException("해당 ID에 맞는 값이 존재하지 않습니다."));
         User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("해당 ID에 맞는 값이 존재하지 않습니다."));
 
-        Reservation reservation = new Reservation(item, user, "PENDING", startAt, endAt);
+        Reservation reservation = new Reservation(item, user, ReservationStatus.PENDING, startAt, endAt);
         Reservation savedReservation = reservationRepository.save(reservation);
 
         RentalLog rentalLog = new RentalLog(savedReservation, "로그 메세지", "CREATE");
